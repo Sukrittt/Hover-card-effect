@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Latin&display=swap');
+:root {
+    --title-font:'Anek Latin', sans-serif;
+    --border: rgb(3, 169, 244);
+    --bg-color: black;
+    --g1: rgb(98, 0, 234);
+    --g2: rgb(236, 64, 122);
+    --g3: rgb(253, 216, 53);
+  }
+body{
+    margin: 0;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background-color: var(--bg-color);
+}
+.card{
+    aspect-ratio: 1/1.6;
+    border: 0.5vmin solid var(--border);
+    cursor: pointer;
+    position: relative;
+    width: 56vmin;
+}
+
+.card::before{
+    background: linear-gradient(
+        130deg,transparent 0% 33%,
+        var(--g1) 66%,
+        var(--g2) 83.5%,
+        var(--g3) 100%);
+    background-position: 0 0;
+    background-size: 300% 300%;
+    transition: background-position 350ms ease, transform 350ms ease;
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+.card:hover::before{
+    background-position: 100% 100%;
+    transform: scale(1.08,1.03);
+}
+.card-content{
+    background-image: radial-gradient(
+        rgba(255,255,255,.2) 8%,
+        transparent 8%
+    );
+    background-position: 0% 0%;
+    background-size: 5vmin 5vmin;
+    transition: background-position 350ms ease;
+    height: calc(100% - 10vmin);
+    padding: 5vmin;
+    width: calc(100% - 10vmin);
+    position: relative;
+    z-index: 2;
+}
+.card:hover > .card-content{
+    background-position: -10% 0;
+}
+.card-title,.card-subtitle{
+    color: white;
+    font-family: var(--title-font);
+    margin: 0;
+    font-weight: 400;
+}
+
+.card-title{
+    font-size: 6vmin;
+}
+.card-subtitle{
+    font-size: 3vmin;
+    margin-top: 2vmin;
+}
+.card-subtitle-word{
+    display: inline-block;
+    margin: 0 .3vmin;
+    position: relative;
+    transform: translateY(40%);
+    transition: none;
+    opacity: 0;
+}
+.card:hover > .card-content > .card-subtitle > .card-subtitle-word{
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 200ms cubic-bezier(.90, .06, .15, .90), opacity 0ms;
+}
